@@ -9,8 +9,8 @@ import java.util.List;
 public class Race {
 
     private boolean isRaining;
-
-    private List<Vehicle> vehicles = new ArrayList<>();
+    private boolean isYellowFlagActive;
+    private final List<Vehicle> vehicles = new ArrayList<>();
 
     public boolean isRaining() {
         return isRaining;
@@ -26,11 +26,12 @@ public class Race {
      */
     public void simulateRace(int laps) {
         for (int i = 0; i < laps; i++) {
+            advance();
+            setYellowFlagStatus();
             for (Vehicle vehicle : vehicles) {
                 vehicle.prepareForLap(this);
                 vehicle.moveForAnHour();
             }
-            advance();
         }
     }
 
@@ -51,13 +52,18 @@ public class Race {
     }
 
     public boolean isYellowFlagActive() {
+        return isYellowFlagActive;
+    }
+
+    private void setYellowFlagStatus() {
         for (Vehicle vehicle : vehicles) {
             if (vehicle instanceof Truck truck) {
                 if (truck.isBroken()) {
-                    return true;
+                    isYellowFlagActive = true;
+                    break;
                 }
             }
         }
-        return false;
+        isYellowFlagActive = false;
     }
 }
