@@ -1,6 +1,7 @@
 package com.codecool.car_race.vehicles;
 
 import com.codecool.car_race.GenerateRandom;
+import com.codecool.car_race.Race;
 
 public class Bike extends Vehicle{
 
@@ -9,15 +10,15 @@ public class Bike extends Vehicle{
     }
 
     @Override
-    public void prepareForLap(boolean isDisadvantage) {
-        if (isDisadvantage) {
-            actualSpeed = GenerateRandom.generateRandom(5, 50);
-        } else {
-            actualSpeed = 100;}
+    public void prepareForLap(Race race) {
+        actualSpeed = 100;
+        if (race.isRaining()) {
+            actualSpeed -= GenerateRandom.generateRandom(5, 50);
+        }
     }
 
     @Override
     public void moveForAnHour() {
-        distanceTraveled = actualSpeed * 60;
+        distanceTraveled += actualSpeed;
     }
 }
