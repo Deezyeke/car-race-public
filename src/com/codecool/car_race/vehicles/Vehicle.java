@@ -6,7 +6,7 @@ public abstract class Vehicle {
 
     protected String name;
     protected int actualSpeed;
-    protected int distanceTraveled;
+    protected int distanceTravelled;
 
     public abstract void prepareForLap(Race race);
     public abstract void moveForAnHour();
@@ -15,7 +15,7 @@ public abstract class Vehicle {
     public String toString() {
         return "{" +
                 "distance travelled: " +
-                distanceTraveled +
+                distanceTravelled +
                 ", " +
                 "type: " +
                 getClass().getSimpleName() +

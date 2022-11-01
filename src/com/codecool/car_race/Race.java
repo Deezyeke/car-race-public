@@ -4,21 +4,20 @@ import com.codecool.car_race.vehicles.Truck;
 import com.codecool.car_race.vehicles.Vehicle;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Race {
 
-    private boolean raining;
+    private boolean isRaining;
 
     private List<Vehicle> vehicles = new ArrayList<>();
 
     public boolean isRaining() {
-        return raining;
+        return isRaining;
     }
 
-    public void registerRacer(Vehicle ... vehicles) {
-        this.vehicles.addAll(Arrays.asList(vehicles));
+    public void registerRacers(Vehicle ... vehicles) {
+        this.vehicles.addAll(List.of(vehicles));
     }
 
     /**
@@ -32,7 +31,6 @@ public class Race {
                 vehicle.moveForAnHour();
             }
             advance();
-            isYellowFlagActive();
         }
     }
 
@@ -49,13 +47,13 @@ public class Race {
 
     public void advance() {
         int rainingChance = GenerateRandom.generateRandom(0, 10);
-        raining = rainingChance < 3;
+        isRaining = rainingChance < 3;
     }
 
     public boolean isYellowFlagActive() {
         for (Vehicle vehicle : vehicles) {
             if (vehicle instanceof Truck truck) {
-                if (truck.isBrokeDown()) {
+                if (truck.isBroken()) {
                     return true;
                 }
             }

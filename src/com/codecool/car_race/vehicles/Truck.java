@@ -6,7 +6,8 @@ import com.codecool.car_race.Race;
 public class Truck extends Vehicle{
 
     private boolean isBroken;
-    private int brokenLaps = 0;
+    private int brokenLapsCount = 0;
+    private final static int NORMAL_SPEED = 100;
 
     public Truck() {
         this.name = String.valueOf(GenerateRandom.generateRandom(0, 1000));
@@ -17,27 +18,30 @@ public class Truck extends Vehicle{
         if (!isBroken) {isBrokeDown();}
         if (isBroken) {
             actualSpeed = 0;
-            brokenLaps += 1;
+            brokenLapsCount += 1;
         } else {
-            actualSpeed = 100;
+            actualSpeed = NORMAL_SPEED;
         }
         repairTruck();
     }
 
     @Override
     public void moveForAnHour() {
-        distanceTraveled += actualSpeed;
+        distanceTravelled += actualSpeed;
     }
 
-    public boolean isBrokeDown() {
-        int chance = GenerateRandom.generateRandom(0, 100);
-        isBroken = chance < 5;
+    public boolean isBroken() {
         return isBroken;
     }
 
+    public void isBrokeDown() {
+        int chance = GenerateRandom.generateRandom(0, 100);
+        isBroken = chance < 5;
+    }
+
     public void repairTruck() {
-        if (brokenLaps == 2) {
-            brokenLaps = 0;
+        if (brokenLapsCount >= 2) {
+            brokenLapsCount = 0;
             isBroken = false;
         }
     }

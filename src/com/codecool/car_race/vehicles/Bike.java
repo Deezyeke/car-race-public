@@ -5,13 +5,16 @@ import com.codecool.car_race.Race;
 
 public class Bike extends Vehicle{
 
-    public Bike(int number) {
-        this.name = "Motorcycle " + number;
+    private static int bikeCount = 1;
+    private final static int NORMAL_SPEED = 100;
+
+    public Bike() {
+        this.name = "Motorcycle " + bikeCount++;
     }
 
     @Override
     public void prepareForLap(Race race) {
-        actualSpeed = 100;
+        actualSpeed = NORMAL_SPEED;
         if (race.isRaining()) {
             actualSpeed -= GenerateRandom.generateRandom(5, 50);
         }
@@ -19,6 +22,6 @@ public class Bike extends Vehicle{
 
     @Override
     public void moveForAnHour() {
-        distanceTraveled += actualSpeed;
+        distanceTravelled += actualSpeed;
     }
 }

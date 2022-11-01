@@ -12,7 +12,7 @@ public class Main {
      */
     private static void createVehicles(Race race) {
         for (int i = 0; i < 10; i++) {
-            race.registerRacer(new Car(), new Bike(i + 1), new Truck());
+            race.registerRacers(new Car(), new Bike(), new Truck());
         }
     }
 
